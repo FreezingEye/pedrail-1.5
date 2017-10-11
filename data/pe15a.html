@@ -1,0 +1,112 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>PE15A</title>
+<style type="text/css">
+input.vertical { -webkit-appearance: slider-vertical; writing-mode: bt-lr; width:200px; height:400px; }
+button.btn_stp {background-color: #4CAF50;border: none;color: white;padding: 15px 32px;text-align: center;text-decoration: none;display: inline-block;font-size: 24px;margin: 4px 2px;cursor: pointer;width: 350px;}
+</style>
+<script type="text/javascript">
+function roc(s)
+{ 
+var txt;
+var txt2;
+var diff;
+var diff_no;
+var url;
+url ="pwm15a.q?";
+
+if (s==1)
+{
+	url =url+"a=0&b=0";
+}
+else
+{
+	txt = document.getElementById("r_a").value;
+	txt2 = document.getElementById("r_b").value;
+	if (document.getElementById("cb_a").checked || document.getElementById("cb_b").checked)
+	{
+		diff=document.getElementById("t_diff").value;
+		diff_no=Number(diff);
+		if (isNaN(diff_no))
+		{
+			diff_no=0;
+		}
+
+		if (document.getElementById("cb_a").checked)
+		{
+			if ((txt<=0 && txt2<=0)||(txt>=0 && txt2>=0))
+			{
+				txt2=txt;
+			}
+			else
+			{
+				txt2=txt*-1;
+			}
+			if (txt2>0)
+			{
+				txt2=txt2-(diff_no*-1);
+			}
+			else
+			{
+				txt2=txt2-diff_no;
+			}
+			if (txt2>1000)
+			{
+				txt2=1000;
+			}
+			if (txt2<-1000)
+			{
+				txt2=-1000;
+			}
+		}
+		else
+		{
+			if ((txt<=0 && txt2<=0)||(txt>=0 && txt2>=0))
+			{
+				txt=txt2;
+			}
+			else
+			{
+				txt=txt2*-1;	
+			}	
+			if (txt>0)
+			{
+				txt=txt-(diff_no*-1);
+			}
+			else
+			{
+				txt=txt-diff_no;
+			}
+			if (txt>1000)
+			{
+				txt=1000;
+			}
+			if (txt<-1000)
+			{
+				txt=-1000;
+			}
+		}
+	}
+	url =url+"a=" + escape(txt)+"&b=" + escape(txt2);
+}
+
+var xhr = new XMLHttpRequest();
+xhr.open("GET", url, true);
+xhr.onreadystatechange = function(e){ 
+if (xhr.readyState == 4) {
+var rtn = xhr.responseText;
+  document.getElementById("t_return").value = rtn;
+  }
+};
+xhr.send();}
+</script>
+</head><body><table><thead><tr><th>Pedrail 1.5 A</th><th></th><th></th></tr></thead>
+<tbody>
+<tr><td><input type="range" min="-1000" max="1000" value="0" class="vertical" ontouchend="roc()" onmouseup="roc(0)" id="r_a" /></td><td>
+<table><tbody><tr><td><button id="btn_stp1" class="btn_stp" onClick="roc(1)" >STOP</button></td></tr>
+<tr><td><label for="t_return">Return:</label></td><td><input type="text" id="t_return" /></td></tr>
+<tr><td><label for="cb_a">FollowA:</label><input type="checkbox" id="cb_a" defaultChecked=false /></td><td><label for="cb_b">FollowB:</label><input type="checkbox" id="cb_b" defaultChecked=false /></td></tr>
+<tr><td><label for="t_diff">Diff:</label></td><td><input type="text" id="t_diff" /></td></tr>
+<tr><td><button id="btn_stp2" class="btn_stp" onClick="roc(1)" >STOP</button></td></tr></tbody></table>
+</td><td><input type="range" min="-1000" max="1000" value="0" class="vertical" ontouchend="roc()" onmouseup="roc(0)" id="r_b" /></td></tr>
+</tbody>
+<tfoot><tr><td></td><td></td><td>2017-10-09</td></tr></tfoot>
+</table></body></html>
