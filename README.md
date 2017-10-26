@@ -9,4 +9,4 @@ pedrail 1.5 with ESP8266 mcu &amp; Arduino IDE
 | GPIO13 |    D12 |
 | GPIO0 |    D3 |
 
-
+![image](https://github.com/FreezingEye/pedrail-1.5/blob/master/forum_image/ESP8266dCP2104.jpg "CP2104 on ESP8266")
