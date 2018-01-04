@@ -1,4 +1,4 @@
-//8266 AP +ws 1.5号机 OC移植版 wifi ssid=ESP8266xxxxxxxx pwd=ap20171225 访问 http://192.168.128.1/pe15a.html 可见网页  
+//8266 AP +ws 1.5号机 OC移植版 wifi ssid=ESP8266xxxxxxxx pwd=ap20180104 访问 http://192.168.128.1/pe15a.html 可见网页  
 //主页面使用SPIFFS文件保存 上存flash文件工具ESP8266FS-0.3.0(所在位置D:\arduino-1.6.12\tools\ESP8266FS\tool\esp8266fs.jar) arduino IDE 1.6.12版本中成功上存文件，OC的8266要在上存模式先写入程式，然后按重启键，再上存文件Flash Size:"2M(1M SPIFFS)" ，数据文件放在工程目录下/data/...文件夹里
 #include <ESP8266WiFi.h>
 #include <ESP8266WebServer.h>
@@ -112,7 +112,7 @@ void setup() {
   WiFi.softAPConfig(softLocal, softGateway, softSubnet);
   String apName = ("ESP8266_"+(String)ESP.getChipId());
   const char *softAPName = apName.c_str();
-  WiFi.softAP(softAPName, "ap20171225");
+  WiFi.softAP(softAPName, "ap20180104");
   IPAddress myIP = WiFi.softAPIP();
 
 
