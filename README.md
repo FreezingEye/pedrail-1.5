@@ -23,21 +23,24 @@ All OC modules
 
 OCrobot ESP8266 module
 
-|D0 | GPIO03 | RX|
-|D1 | GPIO01 | TX|
-|D2 | GPIO04 | SDA|
-|D3 | GPIO05 | SDL|
-|D4 | GPIO13 | MOSI|
-|D5 | GPIO12 | MISO|
-|D6 | GPIO14 | SCK|
-|D7 | GPIO16 ||
-|D8 | GPIO02 ||
+| D  | GPIO   | Fn |
+| -- | ------ | ----:|
+| D0 | GPIO03 | RX |
+| D1 | GPIO01 | TX |
+| D2 | GPIO04 | SDA |
+| D3 | GPIO05 | SDL |
+| D4 | GPIO13 | MOSI |
+| D5 | GPIO12 | MISO |
+| D6 | GPIO14 | SCK |
+| D7 | GPIO16 |  |
+| D8 | GPIO02 |  |
 
 
 
 OCrobot L6205 module
 
-||A|B|
+| output  | A   | B   |
+| -- | ------ | ----:|
 |方向|D12|D13|
 |速度（PWM）|D3|D11|
 |制动|D9|D8|
