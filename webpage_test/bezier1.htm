@@ -1,0 +1,73 @@
+<html>
+<head>
+  <title>bezier1</title>
+ 
+ <style>
+     canvas {
+       cursor: pointer;
+       border: 1px solid black;
+     }
+ </style>
+    
+    
+ <script>    
+    function drawSomething() {
+        
+    var canvas;
+    var context;
+        
+    canvas = document.getElementById("canvas");
+    context = canvas.getContext("2d");        
+        
+        
+    context.lineWidth = 10;
+    context.strokeStyle = "#cd2828";
+
+    //把笔移动到起点位置
+    context.moveTo(20, 150);
+
+    //创建变量,保存两个控制点以及曲线终点信息
+    var control1_x = 187;
+    var control1_y = 0;
+    var control2_x = 429;
+    var control2_y = 380;
+    var endPointX = 365;
+    var endPointY = 50;
+
+    //绘制曲线
+    context.bezierCurveTo(control1_x, control1_y, control2_x, control2_y, endPointX, endPointY);
+    context.stroke();            
+    }
+     
+    function canvasClick(e) {
+
+    var canvas;
+    canvas = document.getElementById("canvas");        
+
+    var clickX = e.pageX - canvas.offsetLeft;
+    var clickY = e.pageY - canvas.offsetTop;     
+   
+    var context;
+    context = canvas.getContext("2d");   
+
+    context.font = "Bold 20px Arial"; 
+    context.textAlign = "left";
+    context.fillStyle = "#008600"; 
+    context.fillText("X="+clickX+"Y="+clickY, 10, 50);     
+    }
+</script>        
+    
+
+</head>  
+ 
+<body>
+ 
+  <canvas id="canvas" width="400" height="300" onmousedown="canvasClick(event)">
+  </canvas>
+ 
+  <div>
+    <button onclick="drawSomething()">make_bezier</button>
+  </div>
+  
+</body>
+</html>
