@@ -47,4 +47,5 @@ OCrobot L6205 module
 
 Hi there,I have a human-machine interface.It is something like a web page.And the file in data folder.
 But it is not good enough.So no image.Of course Im working on it.
-CU
+
+If clone count over hundred, I may release the new-type interface ^_^
