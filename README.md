@@ -49,3 +49,7 @@ Hi there,I have a human-machine interface.It is something like a web page.And th
 But it is not good enough.So no image.Of course Im working on it.
 
 If clone count over hundred, I may release the new-type interface ^_^
+
+An example video
+
+[This link](http://v.youku.com/v_show/id_XMzQ4Mzg2MTU2NA==.html?spm=a2h0k.8191407.0.0&from=s1.8-1-1.2) http://v.youku.com/v_show/id_XMzQ4Mzg2MTU2NA==.html?spm=a2h0k.8191407.0.0&from=s1.8-1-1.2
