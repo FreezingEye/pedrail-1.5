@@ -5,11 +5,11 @@
 		<title>mqtttest002</title>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js" type="text/javascript"></script>
 		<script>
-client = new Paho.MQTT.Client("ws://mqtt.ocrobot.com/", Number(1883), "");//建立客户端实例  
+client = new Paho.MQTT.Client("q.emqtt.com", Number(8083), "1564564");//建立客户端实例  
 client.connect({onSuccess:onConnect});//连接服务器并注册连接成功处理事件  
 function onConnect() {  
      console.log("onConnected");  
-     client.subscribe("/topic_back");//订阅主题  
+     client.subscribe("jsmqtt20180531");//订阅主题  
 }  
 client.onConnectionLost = onConnectionLost;//注册连接断开处理事件  
 client.onMessageArrived = onMessageArrived;//注册消息接收处理事件  
