@@ -2,10 +2,10 @@
 <html>
 	<head>
 		<meta charset="utf-8" />
-		<title>mqtttest003</title>
+		<title>mqtttest004</title>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js" type="text/javascript"></script>
 		<script>
-client = new Paho.MQTT.Client("q.emqtt.com", Number(8083), "1564564");//建立客户端实例  
+client = new Paho.MQTT.Client("ocrobot.com", Number(8083), "");//建立客户端实例  
 client.connect({onSuccess:onConnect});//连接服务器并注册连接成功处理事件  
 function onConnect() {  
      console.log("onConnected");  
@@ -31,7 +31,7 @@ function onMessageArrived(message) {
 		</script>
 	</head>
 	<body>
-mqtttest003
+mqtttest004
 	</body>
 </html>
 
