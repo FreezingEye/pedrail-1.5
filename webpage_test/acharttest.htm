@@ -1,0 +1,191 @@
+<html>
+    <head>
+        <title>Li battery chart 02</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js" type="text/javascript">/* Mqtt */</script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js">/* Chart */</script>            
+        
+<style type="text/css">/* Chart.js */
+@-webkit-keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}@keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}.chartjs-render-monitor{-webkit-animation:chartjs-render-animation 0.001s;animation:chartjs-render-animation 0.001s;}</style>
+
+	<style>
+	canvas{
+		-moz-user-select: none;
+		-webkit-user-select: none;
+		-ms-user-select: none;
+	}
+	</style>
+        
+		<script>
+        var ar_time = new Array();
+        var ar_volt = new Array();    
+        var vguid;   
+            
+		var config = {
+			type: 'line',
+			data: {
+				labels: [],
+				datasets: [{
+					label: 'OC Li battery2',
+					backgroundColor: 'rgb(255, 99, 132)',
+					borderColor: 'rgb(255, 99, 132)',
+					data: [],
+					fill: false
+				},
+                          {
+					label: 'OC Li battery3',
+					backgroundColor: 'rgb(54, 162, 235)',
+					borderColor: 'rgb(54, 162, 235)',
+					data: []
+				}]
+			},
+			options: {
+				responsive: true,
+				title: {
+					display: true,
+					text: 'Bye-Bye Github'
+				},
+				tooltips: {
+					mode: 'index',
+					intersect: false,
+				},
+				hover: {
+					mode: 'nearest',
+					intersect: true
+				},
+				scales: {
+					xAxes: [{
+						display: true,
+						scaleLabel: {
+							display: true,
+							labelString: 'Time'
+						}
+					}],
+					yAxes: [{
+						display: true,
+						scaleLabel: {
+							display: true,
+							labelString: 'Volt'
+						}
+					}]
+				}
+			}
+		};   
+            
+    		window.onload = function() {
+			var ctx = document.getElementById('canvas').getContext('2d');
+			window.myLine = new Chart(ctx, config);
+		};       
+                           
+            
+            
+        function guid() {
+            return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+                var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
+                return v.toString(16);
+            });
+        }            
+            
+        function mqtt_go() {            
+            vguid=guid();
+            client = new Paho.MQTT.Client("mqtt.ocrobot.com", Number(8083), vguid);
+            client.connect({onSuccess:mqtt_connect});
+            client.onMessageArrived = receive_message;
+        }             
+
+        function mqtt_connect() {  
+         console.log("Connected");  
+        console.log(vguid);
+         sndmsg = new Paho.MQTT.Message(vguid);  
+         sndmsg.destinationName = "farewell2github20180611signin";  
+         client.send(sndmsg);            
+            
+         client.subscribe("farewell2github20180611");
+        }  
+            
+        function receive_message(message) {  
+              get_data(message.payloadString); 
+         }             
+            
+        function get_data(Astr){
+            var v,v3,t;
+            var vtime,vlbl;              
+            
+            document.getElementById("textarea").value+= Astr+"\n";
+            
+            
+            if ((Astr.indexOf("{") != -1)&&(Astr.indexOf("}") != -1)&&(config.data.datasets.length > 0))
+            {
+                var vrtn = Astr;
+                vrtn =vrtn.replace("{","");
+                vrtn =vrtn.replace("}","");
+
+                var ar_str = vrtn.split(",");  
+                t=ar_str[0];    
+                v=ar_str[1];  
+                v3=ar_str[2]; 
+                
+                  if (t!=0)
+                  {                 
+                      var s,n,h;
+                      s=Math.floor(t / 1000 ); 
+                      n=Math.floor(s / 60 ); 
+                      h=Math.floor(n / 60);
+                      if (h<10){
+                        vtime='0'+h;
+                      }else{
+                        vtime=h;         
+                      }
+                      n= n % 60;
+                      if (n<10){
+                        vtime=vtime+':0'+n;  
+                      }else{
+                        vtime=vtime+':'+n;    
+                      }
+                      s= s % 60;
+                      if (s<10){
+                        vtime=vtime+':0'+s;  
+                      }else{
+                        vtime=vtime+':'+s;    
+                      }              
+
+                      var m=v*0.003;     
+                      vlbl=m.toFixed(3)+'V '+vtime;  
+                  }
+                  else
+                  {
+                      vlbl='N/A';
+                  }                
+                
+				config.data.labels.push(vlbl);
+				config.data.datasets[0].data.push(v);   
+                config.data.datasets[1].data.push(v3);
+                window.myLine.update();
+            }            
+
+        } 
+            
+        
+   
+            
+            
+        function button_gogogo() //btn_go make anything start once 
+        {
+            document.getElementById("btn_go").disabled = true;
+            mqtt_go();
+        }             
+        </script>              
+</head>
+    
+<body>
+	<br>
+	<button id="btn_go" onclick="button_gogogo()">GoGoGo</button>    
+	<br>    
+    
+	<div style="width:75%;"><div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+		<canvas id="canvas" width="1422" height="711" class="chartjs-render-monitor" style="display: block; height: 474px; width: 948px;"></canvas>    
+	<br>
+    <textarea id="textarea" rows=5 cols=100></textarea>    
+          
+</body>
+</html>
