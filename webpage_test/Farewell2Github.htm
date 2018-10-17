@@ -26,7 +26,7 @@
 			data: {
 				labels: [],
 				datasets: [{
-					label: 'OC Li battery',
+					label: 'OC Li battery2',
 					backgroundColor: 'rgb(255, 99, 132)',
 					borderColor: 'rgb(255, 99, 132)',
 					data: [],
@@ -142,7 +142,7 @@
                         vtime=vtime+':'+s;    
                       }              
 
-                      var m=v*0.003;     
+                      var m=(v*0.003*320)/220;     
                       vlbl=m.toFixed(3)+'V '+vtime;  
                   }
                   else
@@ -180,4 +180,4 @@
     <textarea id="textarea" rows=5 cols=100></textarea>    
           
 </body>
-</html> 
+</html>
