@@ -1,0 +1,21 @@
+<html>
+    <head>
+        <title>webpage & APP</title>
+    <script type="text/javascript">  
+        function frm_app(sometxt)  
+        {
+            document.getElementById("TextArea").value+= sometxt+"\n";
+        }
+        function bc_send_2_app() {
+            send_2_app(document.getElementById("MsgEdit").value);
+        }           
+    </script>       
+    </head>
+    <body>
+        <h3>communication test between webpage & APP</h3>
+        <input id="MsgEdit" type="input"/>   
+        <input id="BtnSend2App" type="button" value="Send2App" onclick="bc_send_2_app()" />   
+        <P>
+        <textarea id="TextArea" rows=15 cols=65></textarea>
+    </body>
+</html>            
